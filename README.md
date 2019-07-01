@@ -1,4 +1,4 @@
 
 # deploy-scripts
 
-Central repository house and distribute backed deployment scripts
+Central repository to house and distribute backed deployment scripts
