@@ -17,8 +17,8 @@ if [ -z "$TRAVIS_PULL_REQUEST" ] || [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
         #REMOTE_DOCKER_PATH="$DOCKER_REPO"/"$DOCKER_REPO_NAMESPACE"/"$DOCKER_IMAGE"
         REMOTE_DOCKER_PATH="$DOCKER_REPO"/"$DOCKER_REPO_NAMESPACE"
         
-        # tag with branch and travis build number then push
-        TAG=travis-buildnum-"$TRAVIS_BUILD_NUMBER"
+        # tag with branch and travis tag then push
+        TAG=release-"$TRAVIS_TAG"
         echo Tagging with "$TAG"
         docker tag "$DOCKER_IMAGE":latest "$REMOTE_DOCKER_PATH":"$TAG"    
         docker push "$REMOTE_DOCKER_PATH":"$TAG"
