@@ -14,7 +14,8 @@ if [ -z "$TRAVIS_PULL_REQUEST" ] || [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
         echo Getting the ECR login...
         eval $(aws ecr get-login --no-include-email --region $AWS_DEFAULT_REGION)
 
-        REMOTE_DOCKER_PATH="$DOCKER_REPO"/"$DOCKER_REPO_NAMESPACE"/"$DOCKER_IMAGE"
+        #REMOTE_DOCKER_PATH="$DOCKER_REPO"/"$DOCKER_REPO_NAMESPACE"/"$DOCKER_IMAGE"
+        REMOTE_DOCKER_PATH="$DOCKER_REPO"/"$DOCKER_REPO_NAMESPACE"
         
         # tag with branch and travis build number then push
         TAG=travis-buildnum-"$TRAVIS_BUILD_NUMBER"
