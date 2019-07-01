@@ -10,9 +10,9 @@
 # 2. echo out the parameter values so they can be used by the container apps
 # 3. determine the best place to run this script so that it populates the env vars before they're needed by other code
 
-EC2_REGION="us-west-2" # unfortunately cannot rely on dynamic env var values that this script is meant to pull in
-NAMESPACE="/production/2018/API" # future-proofing this script for subsequent or past containers
-PROJECT_CANONICAL_NAME="disaster-resilience" # must be set to each project's "Final naming convention" from here https://github.com/hackoregon/civic-devops/issues/1
+EC2_REGION="$AWS_DEFAULT_REGION" # unfortunately cannot rely on dynamic env var values that this script is meant to pull in
+NAMESPACE="$DOCKER_REPO_NAMESPACE" # future-proofing this script for subsequent or past containers
+PROJECT_CANONICAL_NAME="$PROJECT_NAME" # must be set to each project's "Final naming convention" from here https://github.com/hackoregon/civic-devops/issues/1
 
 # Get unencrypted values
 POSTGRES_HOST=`aws ssm get-parameters --names "$NAMESPACE"/"$PROJECT_CANONICAL_NAME"/POSTGRES_HOST --no-with-decryption --region $EC2_REGION | jq -r ".Parameters[0].Value"`
