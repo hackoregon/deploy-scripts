@@ -29,7 +29,7 @@ fi
 chmod +x *.py
 
 echo "Make migrations"
-python -Wall manage.py makemigrations {{cookiecutter.python_subpackage}}
+python -Wall manage.py makemigrations
 
 echo "Migrate"
 python -Wall manage.py migrate
