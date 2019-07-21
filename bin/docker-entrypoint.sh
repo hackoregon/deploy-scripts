@@ -14,9 +14,7 @@ echo "ENV"
 env
 
 if [ ! "${DEBUG,,}" ] && [ ! "${TRAVIS}" ]; then
-  cat /code/bin/get-ssm-parameters.sh
-  cat /code/src_files/bin/get-ssm-parameters.sh
-  source /code/bin/get-ssm-parameters.sh
+  source /code/src_files/bin/get-ssm-parameters.sh
 fi
 
 if [ "$POSTGRES_NAME" ]; then
