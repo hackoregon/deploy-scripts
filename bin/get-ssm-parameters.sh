@@ -17,6 +17,12 @@ NAMESPACE="$DOCKER_REPO_NAMESPACE" # future-proofing this script for subsequent 
 PROJECT_CANONICAL_NAME="$PROJECT_NAME" # must be set to each project's "Final naming convention" from here https://github.com/hackoregon/civic-devops/issues/1
 
 # Get unencrypted values
+echo "$NAMESPACE"/"$PROJECT_CANONICAL_NAME"/POSTGRES_HOST
+echo "$NAMESPACE"/"$PROJECT_CANONICAL_NAME"/POSTGRES_NAME
+echo "$NAMESPACE"/"$PROJECT_CANONICAL_NAME"/POSTGRES_PORT
+echo "$NAMESPACE"/"$PROJECT_CANONICAL_NAME"/POSTGRES_USER
+echo "$NAMESPACE"/"$PROJECT_CANONICAL_NAME"/PROJECT_NAME
+
 POSTGRES_HOST=`aws ssm get-parameters --names "$NAMESPACE"/"$PROJECT_CANONICAL_NAME"/POSTGRES_HOST --no-with-decryption --region $EC2_REGION | jq -r ".Parameters[0].Value"`
 POSTGRES_NAME=`aws ssm get-parameters --names "$NAMESPACE"/"$PROJECT_CANONICAL_NAME"/POSTGRES_NAME --no-with-decryption --region $EC2_REGION | jq -r ".Parameters[0].Value"`
 POSTGRES_PORT=`aws ssm get-parameters --names "$NAMESPACE"/"$PROJECT_CANONICAL_NAME"/POSTGRES_PORT --no-with-decryption --region $EC2_REGION | jq -r ".Parameters[0].Value"`
