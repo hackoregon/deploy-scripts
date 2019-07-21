@@ -10,8 +10,12 @@ set -e
 # Pull in environment variables values from AWS Parameter Store, and preserve the exports
 # source usage per https://stackoverflow.com/q/14742358/452120 (iff running on travis-ci)
 echo Debug: "${DEBUG,,}"
+echo "ENV"
+env
 
 if [ ! "${DEBUG,,}" ] && [ ! "${TRAVIS}" ]; then
+  cat /code/bin/get-ssm-parameters.sh
+  cat /code/src_files/bin/get-ssm-parameters.sh
   source /code/bin/get-ssm-parameters.sh
 fi
 
