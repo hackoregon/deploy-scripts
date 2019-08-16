@@ -14,12 +14,12 @@ if [ -z "$TRAVIS_PULL_REQUEST" ] || [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
         echo Getting the ECR login...
         eval $(aws ecr get-login --no-include-email --region $AWS_DEFAULT_REGION)
 
-        REMOTE_DOCKER_PATH="$DOCKER_REPO"/"$DOCKER_REPO_NAMESPACE"
-        
+        REMOTE_DOCKER_PATH="$DOCKER_REPO"/"$DOCKER_REPO_NAMESPACE"/"$PROJECT_NAME"
+
         # tag with branch and travis tag then push
         TAG=release-"$TRAVIS_TAG"
         echo Tagging with "$TAG"
-        docker tag "$DOCKER_IMAGE":latest "$REMOTE_DOCKER_PATH":"$TAG"    
+        docker tag "$DOCKER_IMAGE":latest "$REMOTE_DOCKER_PATH":"$TAG"
         docker push "$REMOTE_DOCKER_PATH":"$TAG"
 
         # tag with "latest" then push
@@ -27,9 +27,9 @@ if [ -z "$TRAVIS_PULL_REQUEST" ] || [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
         echo Tagging with "$TAG"
         docker tag "$DOCKER_IMAGE":latest "$REMOTE_DOCKER_PATH":"$TAG"
         docker push "$REMOTE_DOCKER_PATH":"$TAG"
-        
+
         #echo Running ecs-deploy.sh script...
-        bin/ecs-deploy.sh  \
+        scripts/deploy/ecs-deploy.sh  \
            --service-name "$ECS_SERVICE_NAME" \
            --cluster "$ECS_CLUSTER"   \
            --image "$REMOTE_DOCKER_PATH":latest \
