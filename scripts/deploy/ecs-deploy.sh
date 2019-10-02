@@ -460,6 +460,7 @@ function waitForGreenDeployment {
     if [[ "${ENABLE_ROLLBACK}" != "false" ]]; then
       rollback
     fi
+    echo "Timed out waiting for service deployment success."
     exit 1
   fi
 }
